@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Temperature Converter</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      text-align: center;
+      width: 320px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #ff9800;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e68900;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Temperature Converter</h1>
+  <input type="number" id="tempInput" placeholder="Enter Temperature" />
+  <select id="fromUnit">
+    <option value="C">Celsius (°C)</option>
+    <option value="F">Fahrenheit (°F)</option>
+    <option value="K">Kelvin (K)</option>
+  </select>
+  <select id="toUnit">
+    <option value="C">Celsius (°C)</option>
+    <option value="F">Fahrenheit (°F)</option>
+    <option value="K">Kelvin (K)</option>
+  </select>
+  <button onclick="convertTemp()">Convert</button>
+  <div id="result"></div>
+</div>
+
+<script>
+  function convertTemp() {
+    const temp = parseFloat(document.getElementById('tempInput').value);
+    const from = document.getElementById('fromUnit').value;
+    const to = document.getElementById('toUnit').value;
+    let result = '';
+
+    if (isNaN(temp)) {
+      result = "Please enter a valid number.";
+    } else {
+      if (from === to) {
+        result = `${temp.toFixed(2)} °${to}`;
+      } else {
+        let celsius;
+
+        // Convert from any unit to Celsius first
+        if (from === 'C') celsius = temp;
+        else if (from === 'F') celsius = (temp - 32) * 5/9;
+        else if (from === 'K') celsius = temp - 273.15;
+
+        // Convert from Celsius to target unit
+        let finalTemp;
+        if (to === 'C') finalTemp = celsius;
+        else if (to === 'F') finalTemp = (celsius * 9/5) + 32;
+        else if (to === 'K') finalTemp = celsius + 273.15;
+
+        result = `Converted Temperature: ${finalTemp.toFixed(2)} °${to}`;
+      }
+    }
+
+    document.getElementById('result').innerText = result;
+  }
+</script>
+
+</body>
+</html>
