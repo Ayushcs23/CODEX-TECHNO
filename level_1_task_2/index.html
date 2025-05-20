@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ayush Shukla - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+      color: #eee;
+    }
+    /* Custom scrollbar for dark mode */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1f1f1f;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #00bcd4;
+      border-radius: 10px;
+      border: 2px solid #1f1f1f;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Hero Section -->
+  <header id="hero" class="relative flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-6 py-16 md:py-24 gap-10">
+    <div class="flex-1 max-w-md text-center md:text-left">
+      <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-yellow-400 drop-shadow-lg">
+        Ayush Shukla
+      </h1>
+      <p class="mt-3 text-xl text-gray-300 font-semibold">Aspiring Software Engineer</p>
+      <p class="mt-2 text-gray-400 max-w-md">Based in Sultanpur, India. I build meaningful software solutions through innovation, discipline, and teamwork.</p>
+      <div class="mt-6 flex justify-center md:justify-start gap-6">
+        <a href="https://github.com/Ayushcs23" target="_blank" aria-label="GitHub" class="text-teal-400 hover:text-yellow-400 transition-colors text-3xl">
+          <svg fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.2c-3.34.72-4.04-1.6-4.04-1.6a3.18 3.18 0 00-1.33-1.75c-1.1-.75.08-.74.08-.74a2.52 2.52 0 011.83 1.24 2.55 2.55 0 003.49 1 2.54 2.54 0 01.76-1.6c-2.67-.3-5.47-1.34-5.47-5.96a4.65 4.65 0 011.23-3.22 4.3 4.3 0 01.12-3.18s1-.32 3.3 1.23a11.37 11.37 0 016 0c2.28-1.55 3.28-1.23 3.28-1.23a4.3 4.3 0 01.12 3.18 4.63 4.63 0 011.23 3.22c0 4.63-2.8 5.65-5.48 5.95a2.86 2.86 0 01.81 2.22v3.29c0 .33.21.7.83.58A12 12 0 0012 0z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/ayush-shukla-487660216" target="_blank" aria-label="LinkedIn" class="text-blue-500 hover:text-yellow-400 transition-colors text-3xl">
+          <svg fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5a2.5 2.5 0 11-.001 5.001A2.5 2.5 0 014.98 3.5zm.02 4.5H1.5v14h3.5v-14zm7.5 0h-3.3v14h3.3v-7.8c0-4.2 5.5-4.5 5.5 0v7.8h3.3v-8.4c0-7.2-7.7-6.9-8.8-3.3v-2.3z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="flex-1 max-w-xs md:max-w-sm rounded-full overflow-hidden shadow-lg border-4 border-yellow-400">
+      <img src="Profilr_picture.jpg" alt="Ayush Shukla" class="w-full h-auto object-cover" />
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-7xl mx-auto px-6 py-16 space-y-24">
+
+    <!-- About Me -->
+    <section id="about" class="max-w-4xl mx-auto text-center md:text-left">
+      <h2 class="text-yellow-400 text-4xl font-bold mb-6 border-b-2 border-teal-400 inline-block pb-2">About Me</h2>
+      <p class="text-gray-300 leading-relaxed text-lg">
+        I am Ayush Shukla, an aspiring Software Engineer fueled by a passion for crafting impactful solutions and a relentless drive to learn and grow. Rooted in discipline and structured execution, I thrive in collaborative environments where ideas evolve into tangible innovations. Currently pursuing B.Tech in Computer Science at GLA University, I embrace challenges with critical thinking and problem-solving at the forefront, always aiming to deliver software that not only works but inspires.
+      </p>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="max-w-5xl mx-auto">
+      <h2 class="text-yellow-400 text-4xl font-bold mb-8 border-b-2 border-teal-400 inline-block pb-2 text-center">Skills</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5">
+        <span class="bg-yellow-400 text-black font-semibold rounded-full px-4 py-2 text-center hover:bg-yellow-500 cursor-default transition">Problem Solving</span>
+        <span class="bg-teal-400 text-black font-semibold rounded-full px-4 py-2 text-center hover:bg-teal-500 cursor-default transition">Critical Thinking</span>
+        <span class="bg-blue-500 text-white font-semibold rounded-full px-4 py-2 text-center hover:bg-blue-600 cursor-default transition">Project Management</span>
+        <span class="bg-yellow-400 text-black font-semibold rounded-full px-4 py-2 text-center hover:bg-yellow-500 cursor-default transition">Time Management</span>
+        <span class="bg-teal-400 text-black font-semibold rounded-full px-4 py-2 text-center hover:bg-teal-500 cursor-default transition">Multitasking</span>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="max-w-6xl mx-auto">
+      <h2 class="text-yellow-400 text-4xl font-bold mb-10 border-b-2 border-teal-400 inline-block pb-2 text-center">Projects</h2>
+      <div class="grid gap-10 md:grid-cols-2">
+        <article class="bg-gray-900 rounded-lg p-6 shadow-lg border-2 border-transparent hover:border-yellow-400 transition cursor-pointer">
+          <h3 class="text-xl font-bold text-yellow-400 mb-2">Nezmat</h3>
+          <p class="text-gray-300 italic mb-3">AI-powered smart yoga mat</p>
+          <p class="text-gray-400 mb-4">An intelligent posture feedback system that helps users improve yoga practice through real-time AI insights.</p>
+          <p class="text-teal-400 font-semibold">Tech: AI, Computer Vision, IoT</p>
+        </article>
+
+        <article class="bg-gray-900 rounded-lg p-6 shadow-lg border-2 border-transparent hover:border-yellow-400 transition cursor-pointer">
+          <h3 class="text-xl font-bold text-yellow-400 mb-2">Hospital Bed Management</h3>
+          <p class="text-gray-300 italic mb-3">Real-time bed availability tracking web app</p>
+          <p class="text-gray-400 mb-4">A dynamic application that monitors and displays hospital bed occupancy to streamline patient care logistics.</p>
+          <p class="text-teal-400 font-semibold">Tech: React, Node.js, MongoDB</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" class="max-w-4xl mx-auto">
+      <h2 class="text-yellow-400 text-4xl font-bold mb-8 border-b-2 border-teal-400 inline-block pb-2 text-center">Certifications</h2>
+      <ul class="list-disc list-inside text-gray-300 text-lg space-y-2 max-w-md mx-auto">
+        <li>Microsoft Power BI</li>
+        <li>AI for Beginners by HP</li>
+        <li>Python by GeeksforGeeks</li>
+        <li>Java by Great Learning Academy</li>
+      </ul>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements" class="max-w-4xl mx-auto">
+      <h2 class="text-yellow-400 text-4xl font-bold mb-8 border-b-2 border-teal-400 inline-block pb-2 text-center">Achievements & Involvement</h2>
+      <ul class="list-disc list-inside text-gray-300 text-lg space-y-3 max-w-xl mx-auto">
+        <li><span class="font-semibold text-yellow-400">Technavya Co-Coordinator</span> at GLA University, leading event organization and execution.</li>
+        <li>Presented projects at multiple Project Exhibition events, showcasing innovation and technical skills.</li>
+        <li>Volunteered in a 24-hour overnight hackathon, managing coordination and logistics efficiently.</li>
+        <li>Participated in Smart India Hackathon 2024, contributing to national-level problem solving.</li>
+        <li>Strong preference for discipline and structured execution in all tasks.</li>
+        <li>Passionate about learning through building projects and collaborating with teams.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- Contact / Footer -->
+  <footer id="contact" class="bg-gray-900 border-t border-yellow-400 py-10 mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="text-center md:text-left text-gray-300">
+        <p class="text-lg font-semibold text-yellow-400">Get In Touch</p>
+        <p>Email: <a href="mailto:ayushshuklaa11@gmail.com" class="text-teal-400 hover:text-yellow-400 transition">ayushshuklaa11@gmail.com</a></p>
+        <p>Phone: <a href="tel:+917275314197" class="text-teal-400 hover:text-yellow-400 transition">+91 72753 14197</a></p>
+        <p>Location: Sultanpur, India</p>
+      </div>
+      <div class="flex gap-6 text-3xl">
+        <a href="https://github.com/Ayushcs23" target="_blank" aria-label="GitHub" class="text-teal-400 hover:text-yellow-400 transition">
+          <svg fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.2c-3.34.72-4.04-1.6-4.04-1.6a3.18 3.18 0 00-1.33-1.75c-1.1-.75.08-.74.08-.74a2.52 2.52 0 011.83 1.24 2.55 2.55 0 003.49 1 2.54 2.54 0 01.76-1.6c-2.67-.3-5.47-1.34-5.47-5.96a4.65 4.65 0 011.23-3.22 4.3 4.3 0 01.12-3.18s1-.32 3.3 1.23a11.37 11.37 0 016 0c2.28-1.55 3.28-1.23 3.28-1.23a4.3 4.3 0 01.12 3.18 4.63 4.63 0 011.23 3.22c0 4.63-2.8 5.65-5.48 5.95a2.86 2.86 0 01.81 2.22v3.29c0 .33.21.7.83.58A12 12 0 0012 0z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/ayush-shukla-487660216" target="_blank" aria-label="LinkedIn" class="text-blue-500 hover:text-yellow-400 transition">
+          <svg fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5a2.5 2.5 0 11-.001 5.001A2.5 2.5 0 014.98 3.5zm.02 4.5H1.5v14h3.5v-14zm7.5 0h-3.3v14h3.3v-7.8c0-4.2 5.5-4.5 5.5 0v7.8h3.3v-8.4c0-7.2-7.7-6.9-8.8-3.3v-2.3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <p class="text-center text-gray-500 text-sm mt-8">© 2025 Ayush Shukla. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
