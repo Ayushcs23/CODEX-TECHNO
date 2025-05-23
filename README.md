@@ -1,17 +1,11 @@
 ﻿# 💻 Codex Techno Web Development & Designing Internship Tasks
 
 Welcome to my GitHub repository for the **Web Development and Designing Internship** offered by **Codex Techno**. This repository contains all the tasks completed as a part of the internship program, with each task explained in detail and implemented with proper documentation.
-
----
-
 ## 📋 Internship Overview
 
 During this internship, participants were required to complete a set of web development tasks categorized under different levels. Each task helped build foundational to intermediate-level front-end development skills using **HTML, CSS, and JavaScript**.
 
 I have completed **Level 1** tasks and included detailed documentation and code in their respective folders.
-
----
-
 ## ✅ Tasks Completed
 
 ### 🔹 Level 1 - Beginner Tasks
@@ -23,8 +17,6 @@ I have completed **Level 1** tasks and included detailed documentation and code 
 | **Task 3** | [https://github.com/Ayushcs23/CODEX-TECHNO/tree/main/level_1_task_3](./Level1_Task3_TemperatureConverter) | Built an interactive web app to convert temperature between Celsius and Fahrenheit, with an additional challenge to convert to/from Kelvin. UI includes dropdowns, input fields, and output display. |
 
 Each task includes its own `README.md` with instructions, features, and screenshots (if applicable).
-
----
 
 ## 🧰 Tech Stack Used
 
