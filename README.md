@@ -83,7 +83,7 @@ Codex-Techno-Internship/
 
 Feel free to explore the repository and connect with me on LinkedIn for more updates and projects:
 
-[LinkedIn Profile](https://www.linkedin.com/in/ayushshukla/)
+[LinkedIn Profile](www.linkedin.com/in/ayush-shukla-487660216)
 
 ---
 
