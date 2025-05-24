@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Auth System</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --success: #00b894;
+            --error: #d63031;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.1),
+                0 5px 15px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px 0;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tab.active {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        .tab-slider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        .auth-form {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--dark);
+            font-size: 24px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            background: #f1f3f6;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.05),
+                        inset -3px -3px 6px rgba(255, 255, 255, 0.8);
+        }
+
+        .input-group input:focus {
+            box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.05),
+                        inset -1px -1px 3px rgba(255, 255, 255, 0.8),
+                        0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        .input-group label {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: #999;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            top: -10px;
+            left: 10px;
+            font-size: 12px;
+            background: white;
+            padding: 0 5px;
+            color: var(--primary);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .forgot-password a {
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: var(--primary);
+        }
+
+        .error-message {
+            color: var(--error);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: #999;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: #eee;
+        }
+
+        .social-login p::before {
+            left: 0;
+        }
+
+        .social-login p::after {
+            right: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f3f6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.05),
+                        -3px -3px 6px rgba(255, 255, 255, 0.8);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+                        -5px -5px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .social-icon:active {
+            transform: translateY(0);
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1),
+                        inset -2px -2px 5px rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 30px 20px;
+            }
+            
+            .form-title {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .input-group input {
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="form-container">
+            <div class="tabs">
+                <div class="tab active" data-tab="login">Login</div>
+                <div class="tab" data-tab="register">Register</div>
+                <div class="tab-slider"></div>
+            </div>
+
+            <form id="login-form" class="auth-form active">
+                <h2 class="form-title">Welcome Back</h2>
+                <div class="input-group">
+                    <input type="text" id="login-email" placeholder=" " required>
+                    <label for="login-email">Email</label>
+                    <div class="error-message" id="login-email-error">Please enter your email</div>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="login-password" placeholder=" " required>
+                    <label for="login-password">Password</label>
+                    <div class="error-message" id="login-password-error">Please enter your password</div>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+                <div class="forgot-password">
+                    <a href="#">Forgot password?</a>
+                </div>
+                <div class="social-login">
+                    <p>Or login with</p>
+                    <div class="social-icons">
+                        <div class="social-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="#3b5998">
+                                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                            </svg>
+                        </div>
+                        <div class="social-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="#db4437">
+                                <path d="M12.545 10.239v3.821h5.445c-0.712 2.315-2.647 3.972-5.445 3.972-3.332 0-6.033-2.701-6.033-6.032s2.701-6.032 6.033-6.032c1.498 0 2.866.549 3.921 1.453l2.814-2.814C17.503 2.332 15.139 1.5 12.545 1.5 7.021 1.5 2.545 5.976 2.545 11.5s4.476 10 10 10c8.396 0 10-7.496 10-10 0-0.67-0.069-1.325-0.189-1.961H12.545z"/>
+                            </svg>
+                        </div>
+                        <div class="social-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="#1da1f2">
+                                <path d="M22.162 5.656a8.384 8.384 0 01-2.402.658A4.196 4.196 0 0021.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 00-7.126 3.814 11.874 11.874 0 01-8.62-4.37 4.168 4.168 0 00-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 01-1.894-.523v.052a4.185 4.185 0 003.355 4.101 4.21 4.21 0 01-1.89.072A4.185 4.185 0 007.97 16.65a8.394 8.394 0 01-6.191 1.732 11.83 11.83 0 006.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.496 8.496 0 002.087-2.165z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <form id="register-form" class="auth-form">
+                <h2 class="form-title">Create Account</h2>
+                <div class="input-group">
+                    <input type="text" id="register-name" placeholder=" " required>
+                    <label for="register-name">Full Name</label>
+                    <div class="error-message" id="register-name-error">Please enter your name</div>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="register-email" placeholder=" " required>
+                    <label for="register-email">Email</label>
+                    <div class="error-message" id="register-email-error">Please enter a valid email</div>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="register-password" placeholder=" " required>
+                    <label for="register-password">Password</label>
+                    <div class="error-message" id="register-password-error">Password must be at least 6 characters</div>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="register-confirm" placeholder=" " required>
+                    <label for="register-confirm">Confirm Password</label>
+                    <div class="error-message" id="register-confirm-error">Passwords don't match</div>
+                </div>
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            const tabSlider = document.querySelector('.tab-slider');
+            const authForms = document.querySelectorAll('.auth-form');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Move slider
+                    const tabIndex = this.dataset.tab === 'login' ? 0 : 1;
+                    tabSlider.style.transform = `translateX(${tabIndex * 100}%)`;
+                    
+                    // Show corresponding form
+                    authForms.forEach(form => form.classList.remove('active'));
+                    document.getElementById(`${this.dataset.tab}-form`).classList.add('active');
+                });
+            });
+
+            // Form validation
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Validate email
+                const loginEmail = document.getElementById('login-email');
+                const loginEmailError = document.getElementById('login-email-error');
+                if (!loginEmail.value.trim()) {
+                    loginEmailError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    loginEmailError.style.display = 'none';
+                }
+                
+                // Validate password
+                const loginPassword = document.getElementById('login-password');
+                const loginPasswordError = document.getElementById('login-password-error');
+                if (!loginPassword.value.trim()) {
+                    loginPasswordError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    loginPasswordError.style.display = 'none';
+                }
+                
+                if (isValid) {
+                    // Simulate successful login
+                    console.log('Login submitted:', {
+                        email: loginEmail.value,
+                        password: loginPassword.value
+                    });
+                    alert('Login successful! (This is a demo)');
+                }
+            });
+
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Validate name
+                const registerName = document.getElementById('register-name');
+                const registerNameError = document.getElementById('register-name-error');
+                if (!registerName.value.trim()) {
+                    registerNameError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    registerNameError.style.display = 'none';
+                }
+                
+                // Validate email
+                const registerEmail = document.getElementById('register-email');
+                const registerEmailError = document.getElementById('register-email-error');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!registerEmail.value.trim()) {
+                    registerEmailError.textContent = 'Please enter your email';
+                    registerEmailError.style.display = 'block';
+                    isValid = false;
+                } else if (!emailRegex.test(registerEmail.value)) {
+                    registerEmailError.textContent = 'Please enter a valid email';
+                    registerEmailError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    registerEmailError.style.display = 'none';
+                }
+                
+                // Validate password
+                const registerPassword = document.getElementById('register-password');
+                const registerPasswordError = document.getElementById('register-password-error');
+                if (!registerPassword.value.trim()) {
+                    registerPasswordError.textContent = 'Please enter a password';
+                    registerPasswordError.style.display = 'block';
+                    isValid = false;
+                } else if (registerPassword.value.length < 6) {
+                    registerPasswordError.textContent = 'Password must be at least 6 characters';
+                    registerPasswordError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    registerPasswordError.style.display = 'none';
+                }
+                
+                // Validate confirm password
+                const registerConfirm = document.getElementById('register-confirm');
+                const registerConfirmError = document.getElementById('register-confirm-error');
+                if (!registerConfirm.value.trim()) {
+                    registerConfirmError.textContent = 'Please confirm your password';
+                    registerConfirmError.style.display = 'block';
+                    isValid = false;
+                } else if (registerConfirm.value !== registerPassword.value) {
+                    registerConfirmError.textContent = 'Passwords don\'t match';
+                    registerConfirmError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    registerConfirmError.style.display = 'none';
+                }
+                
+                if (isValid) {
+                    // Simulate successful registration
+                    console.log('Registration submitted:', {
+                        name: registerName.value,
+                        email: registerEmail.value,
+                        password: registerPassword.value
+                    });
+                    alert('Registration successful! (This is a demo)');
+                    
+                    // Switch to login tab
+                    document.querySelector('.tab[data-tab="login"]').click();
+                    loginForm.querySelector('input[type="email"]').value = registerEmail.value;
+                    loginForm.querySelector('input[type="password"]').value = registerPassword.value;
+                }
+            });
+
+            // Add floating label functionality
+            document.querySelectorAll('.input-group input').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentNode.querySelector('label').style.color = 'var(--primary)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentNode.querySelector('label').style.color = '#999';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
